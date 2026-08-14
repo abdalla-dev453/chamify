@@ -28,6 +28,7 @@ class Loan(TenantScopedModel):
     status = db.Column(db.Enum(*LOAN_STATUSES, name="loan_status"), default="pending_appraisal")
 
     disbursed_at = db.Column(db.DateTime, nullable=True)
+    
     disbursement_mpesa_id = db.Column(db.String(36), db.ForeignKey("mpesa_transactions.id"), nullable=True)
 
     borrower = db.relationship("User")
