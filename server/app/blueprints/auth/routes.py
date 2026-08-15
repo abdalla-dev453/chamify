@@ -9,7 +9,6 @@ from app.schemas.user_schema import register_schema, login_schema
 from app.middleware.rate_limit import limiter, auth_rate_limit
 from app.utils.responses import error_response
 from app.blueprints.auth import controllers
-from server.app.blueprints import auth
 
 
 auth_bp = Blueprint("auth", __name__)

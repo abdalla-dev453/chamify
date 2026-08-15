@@ -3,7 +3,7 @@ from app.extensions import ma
 from app.models.tenant import Tenant, TENANT_TIERS
 
 
-class TenantSchema(ma.SQAlchemyAutoSchema):
+class TenantSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Tenant
         load_instance = False
