@@ -1,8 +1,6 @@
 """
 Thin HTTP layer: validate input via marshmallow, delegate to controllers.py.
 """
-from xml.dom import ValidationErr
-
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
 from marshmallow import ValidationError
@@ -39,7 +37,7 @@ def login():
 
 
 @auth_bp.route("/refresh", methods=["POST"])
-@jwt_required
+@jwt_required()
 def refresh():
     claims = get_jwt()
     identity = get_jwt_identity()
