@@ -32,8 +32,6 @@ def list_open_votes():
     ])
 
 
-])
-
 # TODO(Phase 5): submit_welfare_request(), approve_welfare_request() -> ledger.post_entry()
 # TODO(Phase 5): cast_ballot() with signature_hash generation
 

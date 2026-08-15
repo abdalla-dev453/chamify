@@ -57,7 +57,7 @@ def _init_celery(app):
 
     # Import models AFTER db.init_app so they register on the same metadata,
     # but BEFORE migrations run.
-    from app.models import (  # noqa: F401
+    from app.models import ( 
         tenant, user, wallet, savings, loan, guarantor,
         ledger, mpesa, dividend, welfare, vote, subscription, audit_log,
     )

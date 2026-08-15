@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.middleware.rbc import roles_required
+from server.app.middleware.rbac import roles_required
 from flask_jwt_extended import jwt_required
 from app.blueprints.admin import controllers
 
