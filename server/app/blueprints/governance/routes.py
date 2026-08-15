@@ -1,8 +1,7 @@
 from flask import Blueprint
 from app.middleware.tenant_scope import require_tenant
 from app.blueprints.governance import controllers
-from server.app.blueprints import governance
-
+from app.blueprints import governance
 
 governance_bp = Blueprint("governance", __name__)
 

@@ -1,8 +1,7 @@
 from flask import Blueprint
-from server.app.middleware.rbac import roles_required
 from flask_jwt_extended import jwt_required
 from app.blueprints.admin import controllers
-
+from app.middleware.rbac import roles_required
 
 admin_bp = Blueprint("admin", __name__)
 
