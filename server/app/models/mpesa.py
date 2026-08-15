@@ -12,7 +12,7 @@ TXN_STATUSES = ("initiated", "pending_callback", "reconciled", "failed", "unmatc
 
 class MpesaTransaction(TenantScopedModel):
     __tablename__ = "mpesa_transactions"
-
+ 
     tenant_id = db.Column(db.String(36), db.ForeignKey("tenants.id"), nullable=False, index=True)
 
     transaction_type = db.Column(db.Enum(*TXN_TYPES, name="mpesa_txn_type"), nullable=False)
