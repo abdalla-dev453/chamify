@@ -25,7 +25,7 @@ def _claims_for(user: User):
 
 
 def register_user(data):
-    tenant = Tenant.query.filter_by(slug=data["tenannt-slug"]).first()
+    tenant = Tenant.query.filter_by(slug=data["tenant_slug"]).first()
     if not tenant:
         return error_response("Unknown tenant", 404)
 
@@ -63,7 +63,7 @@ def register_user(data):
                 "full_name": user.full_name,
                 "role": user.role,
             },
-            "acess_token": access_token,
+            "access_token": access_token,
             "refresh_token": refresh_token,
         },
         message="Account created successfully",
@@ -94,7 +94,7 @@ def login_user(data):
                 "full_name": user.full_name,
                 "role": user.role,
             },
-            "acess_token": access_token,
+            "access_token": access_token,
             "refresh_token": refresh_token,
         },
         message="Logged in successful",

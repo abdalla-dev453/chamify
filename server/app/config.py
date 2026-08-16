@@ -53,6 +53,7 @@ class DevelopmentConfig(BaseConfig):
 
 class TestingConfig(BaseConfig):
     TESTING = True
+    JWT_SECRET_KEY = "test-jwt-secret-not-for-production-use-only-in-ci"
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
 
 

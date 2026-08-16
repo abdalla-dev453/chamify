@@ -6,8 +6,7 @@ shared by schemas, blueprints, and Celery tasks alike.
 import re
 
 
-KENYAN_PHONE_RE = re.compile(r"^254(7/1)\d{8}$")
-
+KENYAN_PHONE_RE = re.compile(r"^(?:\+?254|0)(7|1)\d{8}$")
 
 def normalize_kenyan_phone(raw: str) -> str:
     """
