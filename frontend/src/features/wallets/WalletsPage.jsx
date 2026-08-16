@@ -24,10 +24,10 @@ export default function WalletsPage() {
           Ledger Node Registry
         </h1>
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <span className="font-semibold text-slate-300">Target Inventory:</span>
-          <span className="font-mono">Account Clusters & System Node Balance Sheets</span>
+          <span className="font-semibold text-slate-500">Target Inventory:</span>
+          <span className="font-mono text-orange-700">Account Clusters & System Node Balance Sheets</span>
           <span className="text-slate-600">|</span>
-          <span className="font-semibold text-slate-300">Auditing:</span>
+          <span className="font-semibold text-slate-500">Auditing:</span>
           <span className="text-orange-500 font-mono font-semibold">Live Balances</span>
         </div>
       </div>

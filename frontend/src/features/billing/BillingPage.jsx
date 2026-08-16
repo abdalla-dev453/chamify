@@ -24,10 +24,10 @@ export default function BillingPage() {
           Subscription Matrices
         </h1>
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <span className="font-semibold text-slate-300">Target Module:</span>
-          <span className="font-mono">Tenant Tier Allocation & Billing Plans</span>
+          <span className="font-semibold text-slate-500">Target Module:</span>
+          <span className="font-mono text-orange-700">Tenant Tier Allocation & Billing Plans</span>
           <span className="text-slate-600">|</span>
-          <span className="font-semibold text-slate-300">Status:</span>
+          <span className="font-semibold text-slate-500">Status:</span>
           <span className="text-orange-500 font-mono font-semibold">Live Registry</span>
         </div>
       </div>

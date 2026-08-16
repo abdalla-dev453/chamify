@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   const getInitials = (name) => {
     if (!name) return "CL";
-    return name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+    return name.split(" ").map(n => n).join("").toUpperCase().slice(0, 2);
   };
 
   return (
@@ -45,7 +45,7 @@ export default function Sidebar() {
         {!isCollapsed && (
           <div className="flex flex-col tracking-tight min-w-0">
             <span className="text-sm font-bold font-mono uppercase text-white truncate">
-              ChamaLedger
+              Chamify
             </span>
             <span className="text-[9px] font-bold font-mono tracking-wider text-slate-500 uppercase mt-0.5">
               System Core Console
@@ -63,7 +63,7 @@ export default function Sidebar() {
             title={isCollapsed ? label : ""}
             className={({ isActive }) => `
               group flex items-center rounded-lg px-3 py-2 text-xs font-bold font-mono uppercase tracking-wider transition-colors relative
-              ${isCollapsed ? "justify-center" : "gap-3"}
+              ${isCollapsed ? "justify-center" : "gap-4"} /* Increased padding parameter spacing */
               ${isActive 
                 ? "bg-slate-900 text-orange-500 border border-slate-800/80" 
                 : "text-slate-400 hover:bg-slate-900/40 hover:text-slate-200 border border-transparent"
@@ -72,7 +72,7 @@ export default function Sidebar() {
           >
             <Icon 
               size={14} 
-              className={isCollapsed ? "text-slate-400 group-hover:text-slate-200" : ""} 
+              className={isCollapsed ? "text-slate-400 group-hover:text-slate-200" : "shrink-0"} 
             />
             {!isCollapsed && <span className="truncate">{label}</span>}
           </NavLink>
@@ -88,14 +88,14 @@ export default function Sidebar() {
           title={isCollapsed ? "Billing" : ""}
           className={({ isActive }) => `
             group flex items-center rounded-lg px-3 py-2 text-xs font-bold font-mono uppercase tracking-wider transition-colors
-            ${isCollapsed ? "justify-center" : "gap-3"}
+            ${isCollapsed ? "justify-center" : "gap-4"}
             ${isActive 
               ? "bg-slate-900 text-white border border-slate-800" 
               : "text-slate-400 hover:bg-slate-900/40 hover:text-slate-200 border border-transparent"
             }
           `}
         >
-          <Settings size={14} />
+          <Settings size={14} className="shrink-0" />
           {!isCollapsed && <span>Billing</span>}
         </NavLink>
 
@@ -104,9 +104,9 @@ export default function Sidebar() {
           onClick={logout} 
           title={isCollapsed ? "Terminate Session" : ""}
           className={`group flex w-full items-center rounded-lg px-3 py-2 text-xs font-bold font-mono uppercase tracking-wider text-slate-400 hover:bg-rose-950/20 hover:text-rose-400 border border-transparent transition-colors cursor-pointer
-            ${isCollapsed ? "justify-center" : "gap-3"}`}
+            ${isCollapsed ? "justify-center" : "gap-4"}`}
         >
-          <LogOut size={14} className="text-slate-500 group-hover:text-rose-400" />
+          <LogOut size={14} className="text-slate-500 group-hover:text-rose-400 shrink-0" />
           {!isCollapsed && <span>Exit Session</span>}
         </button>
 

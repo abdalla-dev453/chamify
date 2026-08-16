@@ -24,21 +24,21 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 font-sans">
       
-      {/* Corporate Metadata Header Block */}
-      <div className="flex flex-col gap-1 border-b border-slate-800 pb-4">
+      {/* Corporate Metadata Header Block - Restored Structural Title */}
+      <div className="flex flex-col gap-1.5 border-b border-slate-800 pb-5">
         <h1 className="text-xl font-bold tracking-tight text-white uppercase font-mono">
-          Account Overview
+          System Overview Terminal
         </h1>
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <span className="font-semibold text-slate-300">Authorized Session:</span>
-          <span className="font-mono">{user?.full_name || "System Member"}</span>
+          <span className="font-semibold text-slate-500">Authorized Session:</span>
+          <span className="font-semibold text-orange-700">{user?.full_name || "System Member"}</span>
           <span className="text-slate-600">|</span>
-          <span className="font-semibold text-slate-300">Status:</span>
+          <span className="font-semibold text-slate-500">Status:</span>
           <span className="text-orange-500 font-mono font-semibold">Active Node</span>
         </div>
       </div>
 
-      {/* Structured Asset Metrics Ribbon */}
+      {/* Structured Asset Metrics Ribbon - Tuned Symmetry */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard 
           label="Individual Wallet Equity" 
@@ -50,7 +50,7 @@ export default function DashboardPage() {
           label="Assigned Group Nodes" 
           value={loading ? "—" : String(wallets.length)} 
           icon={Layers}
-          isSecondary={true}
+          isSecondary={false} /* Switched to false to apply high-contrast orange alignment */
         />
         <StatCard 
           label="Aggregate Ledger Valuation" 
@@ -60,14 +60,14 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* System Ledger Ledger Data Table */}
+      {/* System Ledger Data Table */}
       <div className="rounded-xl border border-slate-800 bg-slate-950 p-6 shadow-xl">
         
         {/* Table Control Registry Title */}
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <HandCoins size={14} className="text-orange-500" />
-            <h2 className="text-xs font-bold tracking-widest text-slate-300 uppercase font-mono">
+            <h2 className="text-xs font-bold tracking-widest text-slate-500 uppercase font-mono">
               Asset Node Registry
             </h2>
           </div>
@@ -95,10 +95,10 @@ export default function DashboardPage() {
             {wallets.map((w) => (
               <div 
                 key={w.id} 
-                className="p-3.5 flex items-center justify-between gap-4 bg-slate-950 transition-colors duration-150 hover:bg-slate-900/60"
+                className="p-4 flex items-center justify-between gap-4 bg-slate-950 transition-colors duration-150 hover:bg-slate-900/40"
               >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-slate-900 border border-slate-800 text-slate-400">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-slate-900 border border-slate-800 text-slate-500">
                     <Wallet size={14} />
                   </div>
                   <div className="flex flex-col min-w-0">
@@ -112,7 +112,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-right shrink-0">
-                  <p className="text-sm font-bold tracking-tight text-white font-mono">
+                  <p className="text-sm font-bold tracking-tight text-white font-mono select-all">
                     {formatKes(w.balance || 0)}
                   </p>
                   <ArrowUpRight size={14} className="text-slate-700" />

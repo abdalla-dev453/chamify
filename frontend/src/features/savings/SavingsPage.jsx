@@ -24,10 +24,10 @@ export default function SavingsPage() {
           Savings Matrix Control
         </h1>
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <span className="font-semibold text-slate-300">Target Protocol:</span>
-          <span className="font-mono">Contribution Frequencies & Expected Target Bounds</span>
+          <span className="font-semibold text-slate-500">Target Protocol:</span>
+          <span className="font-mono text-orange-700">Contribution Frequencies & Expected Target Bounds</span>
           <span className="text-slate-600">|</span>
-          <span className="font-semibold text-slate-300">Auditing:</span>
+          <span className="font-semibold text-slate-500">Auditing:</span>
           <span className="text-orange-500 font-mono font-semibold">Live Configurations</span>
         </div>
       </div>

@@ -51,10 +51,10 @@ export default function LoansPage() {
             Credit Ledger Registers
           </h1>
           <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span className="font-semibold text-slate-300">Target Segment:</span>
-            <span className="font-mono">Debt Tranches & Amortization States</span>
+            <span className="font-semibold text-slate-500">Target Segment:</span>
+            <span className="font-mono text-orange-700">Debt Tranches & Amortization States</span>
             <span className="text-slate-600">|</span>
-            <span className="font-semibold text-slate-300">State:</span>
+            <span className="font-semibold text-slate-500">State:</span>
             <span className="text-orange-500 font-mono font-semibold">Live Audit</span>
           </div>
         </div>

@@ -25,8 +25,8 @@ export default function CompliancePage() {
           System Auditing & Registry
         </h1>
         <div className="flex items-center gap-2 text-xs text-slate-400">
-          <span className="font-semibold text-slate-300">Security Target:</span>
-          <span className="font-mono">Compliance & Protocol Activity Logs</span>
+          <span className="font-semibold text-slate-500">Security Target:</span>
+          <span className="font-mono text-orange-700">Compliance & Protocol Activity Logs</span>
           <span className="text-slate-600">|</span>
           <span className="font-semibold text-slate-300">Classification:</span>
           <span className="text-orange-500 font-mono font-semibold">Internal Audit Only</span>
@@ -58,7 +58,7 @@ export default function CompliancePage() {
         ) : error ? (
           <div className="py-12 border border-slate-800 border-dashed rounded-lg flex flex-col items-center justify-center text-center p-4 bg-slate-900/10">
             <ShieldAlert size={20} className="text-rose-500/80 mb-2" />
-            <p className="text-xs text-slate-300 font-bold uppercase tracking-wider font-mono">Access Privileges Revoked</p>
+            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider font-mono">Access Privileges Revoked</p>
             <p className="text-[11px] text-slate-500 mt-1 max-w-sm">
               This operational node requires elevated Group Administrator privileges to run schema index queries.
             </p>
