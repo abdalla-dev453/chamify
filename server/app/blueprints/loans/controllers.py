@@ -44,7 +44,7 @@ def apply_for_loan(data, tenant_id, borrower_user_id):
 
 
 def repayment_schedule_preview(loan_id):
-    loan = Loan.query.get(loan_id)
+    loan = scoped_query(Loan).filter_by(id=loan_id).first()
     if not loan:
         return error_response("Loan not found", 404)
     schedule = reducing_balance_schedule(loan.principal, loan.interest_rate, loan.term_months)
