@@ -7,7 +7,7 @@ from app.utils.responses import success_response
 
 
 def list_welfare_requests():
-    requests = scoped_query(WelfareRequest).oder_by(WelfareRequest.created_at.desc()).all()
+    requests = scoped_query(WelfareRequest).order_by(WelfareRequest.created_at.desc()).all()
     return success_response([
         {
             "id": r.id,

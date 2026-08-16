@@ -20,6 +20,7 @@ def _claims_for(user: User):
     return {
         "role": user.role,
         "tenant": user.tenant.slug,
+        "tenant_id": user.tenant_id,
         "full_name": user.full_name
     }
 
