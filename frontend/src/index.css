@@ -3,17 +3,55 @@
 @tailwind utilities;
 
 @layer components {
-  /* The glassmorphism card used across ACREAGE-style sidebars and panels */
+  /* ==========================================================================
+     Institutional Data Surfaces & Containers
+     ========================================================================== */
+  
+  /* Replaced old glassmorphism structures with rigid corporate console geometry */
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass rounded-2xl;
+    @apply bg-slate-950 border border-slate-800 shadow-xl rounded-xl;
   }
+
+  /* ==========================================================================
+     System Interactive Control Nodes (Buttons)
+     ========================================================================== */
+
+  /* Primary Action Node: Shifted away from legacy emerald green to flat solar orange */
   .btn-primary {
-    @apply bg-brand-emerald-500 hover:bg-brand-emerald-600 text-white font-medium px-4 py-2.5 rounded-xl transition-colors;
+    @apply bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
   }
+
+  /* Accent Action Node: High-contrast solid metallic alternative execution trigger */
   .btn-accent {
-    @apply bg-brand-orange-500 hover:bg-brand-orange-600 text-white font-medium px-4 py-2.5 rounded-xl transition-colors;
+    @apply bg-slate-100 hover:bg-white text-slate-950 font-bold px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
   }
+
+  /* Secondary System Action Node: Non-destructive flat wireframe console trigger */
+  .btn-secondary {
+    @apply bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold px-4 py-2 rounded-lg border border-slate-800 font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+  }
+
+  /* ==========================================================================
+     Data Intake Form Pipeline Parameters
+     ========================================================================== */
+  
+  /* Hardened text inputs to enforce strict tabular monospace spacing and flat frames */
   .input-field {
-    @apply w-full bg-brand-slate-800/60 border border-white/10 text-white placeholder-slate-400 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-emerald-500;
+    @apply w-full bg-slate-900 border border-slate-800 text-white placeholder-slate-700 rounded-lg px-3.5 py-2 font-mono text-sm outline-none transition-colors duration-150 focus:border-orange-500/50;
+  }
+}
+
+@layer utilities {
+  /* ==========================================================================
+     Layout Utility Overrides
+     ========================================================================== */
+  
+  /* Hides default native layout scrollbars across layout frames */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

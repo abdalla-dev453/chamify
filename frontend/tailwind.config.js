@@ -1,25 +1,41 @@
 /**
- * Design tokens matching the ChamaLedger / ACREAGE visual language:
- * emerald as the trust/money color, slate for structure, orange as the
- * energetic accent. Kept centralised here so no component hardcodes hex.
+ * Institutional design tokens for the ChamaLedger platform system core console.
+ * Establishes flat, rigid deep-navy base surfaces, sharp slate geometric borders,
+ * and high-contrast solar orange for numeric and status action parameters.
  */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
+        // Strict system corporate grid palette (No legacy emerald paths permitted)
         brand: {
-          emerald: { 50: "#ecfdf5", 500: "#059669", 600: "#047857", 900: "#064e3b" },
-          slate: { 50: "#f8fafc", 700: "#334155", 800: "#1e293b", 900: "#0f172a" },
-          orange: { 400: "#fb923c", 500: "#ea580c", 600: "#c2410c" },
+          // Dominant operational canvas and structured panel layers
+          slate: {
+            50: "#f8fafc",   // High-density utility text / metallic nodes
+            800: "#1e293b",  // Active layout border lines
+            900: "#0f172a",  // Tabular cell backing panels
+            950: "#020617",  // Absolute platform root canvas background
+          },
+          // High-visibility numeric arrays and system validation tokens
+          orange: {
+            400: "#fb923c",  // Sub-metric highlights / hover text vectors
+            500: "#f97316",  // Primary system tracking accent node
+            600: "#ea580c",  // Destructive / heavy mutation warning bounds
+          },
         },
       },
       fontFamily: {
+        // Retained for generic non-tabular layout wrappers
         sans: ["Inter", "system-ui", "sans-serif"],
+        // Enforced universally across metrics, tickers, and log registries
+        mono: ["JetBrains Mono", "Fira Code", "ui-monospace", "SFMono-Regular", "monospace"],
       },
-      backdropBlur: { xs: "2px" },
+      // Dropped soft backdropBlur keys to optimize terminal frame tracking
+      backdropBlur: {},
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(15, 23, 42, 0.25)",
+        // Replaced soft glass shadows with a dense, flat, geometric structural shadow array
+        console: "0 4px 16px 0 rgba(2, 6, 23, 0.4)",
       },
     },
   },
