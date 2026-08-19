@@ -1,40 +1,25 @@
-export default function StatCard({ label, value, trend, icon: Icon, isSecondary = false }) {
+const ICON_TONES = {
+  green: "bg-brand-green-50 text-brand-green-600",
+  blue: "bg-blue-50 text-blue-600",
+  rose: "bg-rose-50 text-rose-600",
+  slate: "bg-slate-100 text-slate-500",
+};
+
+export default function StatCard({ label, value, trend, icon: Icon, tone = "slate" }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-950 p-5 shadow-sm transition-colors duration-150 hover:border-slate-700">
-      <div className="flex items-center justify-between gap-4">
-        {/* Metric Label */}
-        <p className="text-xs font-bold tracking-wider text-slate-400 uppercase font-mono">
-          {label}
-        </p>
-        
-        {/* Structural Icon Block */}
+    <div className="card p-5">
+      <div className="flex items-start justify-between gap-4">
         {Icon && (
-          <div className={`p-1.5 rounded border ${
-            isSecondary 
-              ? "bg-slate-900 border-slate-800 text-slate-500" 
-              : "bg-slate-900 border-slate-800 text-orange-500"
-          }`}>
-            <Icon size={14} />
+          <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${ICON_TONES[tone] || ICON_TONES.slate}`}>
+            <Icon size={17} />
           </div>
         )}
+        {trend && <span className="badge-green">{trend}</span>}
       </div>
 
-      {/* Main Numerical Matrix Display */}
-      <div className="mt-3 flex items-baseline justify-between gap-2 flex-wrap">
-        <p className={`text-2xl font-bold tracking-tight font-mono ${
-          isSecondary 
-            ? "text-slate-100" 
-            : "text-orange-500"
-        }`}>
-          {value}
-        </p>
-
-        {/* Tabular Trend Indicator */}
-        {trend && (
-          <span className="font-mono text-[10px] font-bold bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-slate-400">
-            {trend}
-          </span>
-        )}
+      <div className="mt-4">
+        <p className="text-2xl font-bold tracking-tight text-slate-900">{value}</p>
+        <p className="mt-1 text-xs font-semibold text-slate-400 uppercase tracking-wide">{label}</p>
       </div>
     </div>
   );
