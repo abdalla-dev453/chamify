@@ -1,32 +1,27 @@
-/**
- * Design tokens for the Chamify UI — aligned to the Google Stitch reference
- * screens: light neutral surfaces, a single confident green for primary
- * actions and active states, black for secondary "quick" actions, and
- * plenty of whitespace inside soft-cornered white cards.
- */
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         brand: {
-          // Neutral app canvas + card surfaces
-          canvas: "#eef1f5", // page background
-          surface: "#ffffff", // card background
-          border: "#e2e8f0", // hairline card/table borders
-          // Primary action / active-state green (chama, savings, M-Pesa)
-          green: {
-            50: "#ecfdf3",
-            100: "#d3f8df",
-            200: "#a6efc1",
-            500: "#22a55a",
-            600: "#178a4a",
-            700: "#106b39",
+          // Flat references
+          canvas: "#eef1f5", 
+          surface: "#ffffff", 
+          border: "#e2e8f0",
+          
+          // Tailored nesting structures explicitly mapping keys
+          navy: {
+            50: "#f0f4f8",
+            100: "#d9e2ec",
+            200: "#bcccdc",
+            500: "#102a43",
+            600: "#0b69a3",
+            700: "#035388",
           },
-          // Secondary "quick action" black
           ink: {
-            900: "#0f1115",
             800: "#1a1d23",
+            900: "#0f1115",
           },
         },
       },

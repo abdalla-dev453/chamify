@@ -18,7 +18,7 @@ export default function Topbar({ placeholder = "Search transactions, members..."
   return (
     <header className="flex items-center gap-4 mb-6">
       <div className="relative flex-1 max-w-xl">
-        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
         <input type="text" placeholder={placeholder} className="search-field" />
       </div>
 

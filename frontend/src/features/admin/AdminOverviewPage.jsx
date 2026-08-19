@@ -18,7 +18,7 @@ export default function AdminOverviewPage() {
   return (
     <div className="space-y-6 font-sans">
       <div className="flex items-center gap-2.5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-green-50 text-brand-green-600">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-navy-50 text-brand-navy-600">
           <Activity size={16} />
         </div>
         <div>
