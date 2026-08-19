@@ -48,6 +48,7 @@ apiClient.interceptors.response.use(
         {},
         { headers: { Authorization: `Bearer ${refreshToken}` } }
       );
+      
       const newToken = data.data.access_token;
       localStorage.setItem("chamaledger_access_token", newToken);
       flushQueue(null, newToken);

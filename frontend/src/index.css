@@ -2,51 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-brand-canvas text-slate-900;
+  }
+}
+
 @layer components {
   /* ==========================================================================
-     Institutional Data Surfaces & Containers
+     Surfaces
      ========================================================================== */
-  
-  /* Replaced old glassmorphism structures with rigid corporate console geometry */
-  .glass-panel {
-    @apply bg-slate-950 border border-slate-800 shadow-xl rounded-xl;
+
+  .card {
+    @apply bg-brand-surface border border-brand-border rounded-2xl shadow-card;
   }
 
   /* ==========================================================================
-     System Interactive Control Nodes (Buttons)
+     Buttons
      ========================================================================== */
 
-  /* Primary Action Node: Shifted away from legacy emerald green to flat solar orange */
+  /* Primary green action — Vote For, Pay Now (M-Pesa), Contribute, submit forms */
   .btn-primary {
-    @apply bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-1.5 bg-brand-green-600 hover:bg-brand-green-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
   }
 
-  /* Accent Action Node: High-contrast solid metallic alternative execution trigger */
-  .btn-accent {
-    @apply bg-slate-100 hover:bg-white text-slate-950 font-bold px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+  /* Black "quick action" / high-emphasis neutral button */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-1.5 bg-brand-ink-900 hover:bg-brand-ink-800 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
   }
 
-  /* Secondary System Action Node: Non-destructive flat wireframe console trigger */
-  .btn-secondary {
-    @apply bg-slate-950 hover:bg-slate-900 text-slate-300 font-bold px-4 py-2 rounded-lg border border-slate-800 font-mono text-xs uppercase tracking-wider transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+  /* White / outline secondary button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-1.5 bg-white hover:bg-slate-50 text-slate-800 font-semibold px-4 py-2 rounded-lg border border-brand-border text-sm transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
+  }
+
+  /* Muted "against / reject" button */
+  .btn-muted {
+    @apply inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-4 py-2 rounded-lg text-sm transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none;
   }
 
   /* ==========================================================================
-     Data Intake Form Pipeline Parameters
+     Forms
      ========================================================================== */
-  
-  /* Hardened text inputs to enforce strict tabular monospace spacing and flat frames */
+
   .input-field {
-    @apply w-full bg-slate-900 border border-slate-800 text-white placeholder-slate-700 rounded-lg px-3.5 py-2 font-mono text-sm outline-none transition-colors duration-150 focus:border-orange-500/50;
+    @apply w-full bg-white border border-brand-border text-slate-900 placeholder-slate-400 rounded-lg px-3.5 py-2.5 text-sm outline-none transition-colors duration-150 focus:border-brand-green-500 focus:ring-2 focus:ring-brand-green-500/15;
+  }
+
+  .search-field {
+    @apply w-full bg-slate-100 border border-transparent text-slate-700 placeholder-slate-400 rounded-lg pl-9 pr-3.5 py-2 text-sm outline-none transition-colors duration-150 focus:bg-white focus:border-brand-border;
+  }
+
+  /* ==========================================================================
+     Badges / status pills
+     ========================================================================== */
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide;
+  }
+  .badge-green {
+    @apply badge bg-brand-green-100 text-brand-green-700;
+  }
+  .badge-blue {
+    @apply badge bg-blue-100 text-blue-700;
+  }
+  .badge-slate {
+    @apply badge bg-slate-100 text-slate-600;
+  }
+  .badge-amber {
+    @apply badge bg-amber-100 text-amber-700;
+  }
+  .badge-rose {
+    @apply badge bg-rose-100 text-rose-700;
+  }
+
+  /* ==========================================================================
+     Progress
+     ========================================================================== */
+
+  .progress-track {
+    @apply w-full h-2 rounded-full bg-slate-200 overflow-hidden;
+  }
+  .progress-fill {
+    @apply h-full rounded-full bg-brand-ink-900 transition-all duration-500;
+  }
+  .progress-fill-green {
+    @apply h-full rounded-full bg-brand-green-600 transition-all duration-500;
   }
 }
 
 @layer utilities {
-  /* ==========================================================================
-     Layout Utility Overrides
-     ========================================================================== */
-  
-  /* Hides default native layout scrollbars across layout frames */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

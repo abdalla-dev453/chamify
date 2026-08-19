@@ -8,36 +8,24 @@ import { createContext, useContext, useEffect } from "react";
 
 const ThemeContext = createContext(null);
 
-// Strict system institutional defaults (No legacy emerald paths permitted)
-const CORPORATE_DEFAULTS = {
-  primary: "#020617",   // Deep Navy Slate Canvas (slate-950)
-  secondary: "#0f172a", // Structured Layer Surface (slate-900)
-  accent: "#f97316",    // High-Contrast Solar Action Node (orange-500)
+// Defaults matching the Stitch-aligned light UI (see tailwind.config.js)
+const BRAND_DEFAULTS = {
+  primary: "#ffffff",  // brand-surface
+  secondary: "#eef1f5", // brand-canvas
+  accent: "#178a4a",    // brand-green-600
 };
 
 export function ThemeProvider({ tenant, children }) {
   useEffect(() => {
     const root = document.documentElement;
 
-    // Extract values or inject system flat-terminal architectural defaults
-    let primary = tenant?.primary_color || CORPORATE_DEFAULTS.primary;
-    let secondary = tenant?.secondary_color || CORPORATE_DEFAULTS.secondary;
-    let accent = tenant?.accent_color || CORPORATE_DEFAULTS.accent;
+    const primary = tenant?.primary_color || BRAND_DEFAULTS.primary;
+    const secondary = tenant?.secondary_color || BRAND_DEFAULTS.secondary;
+    const accent = tenant?.accent_color || BRAND_DEFAULTS.accent;
 
-    /**
-     * Integrity Safeguard: System constraints explicitly prohibit green tones.
-     * Overrides unauthorized legacy #059669 emerald variants if pushed by dirty database seeds.
-     */
-    if (primary.toLowerCase() === "#059669") primary = CORPORATE_DEFAULTS.primary;
-    if (accent.toLowerCase() === "#059669") accent = CORPORATE_DEFAULTS.accent;
-
-    // Apply strict key CSS variable registers
     root.style.setProperty("--tenant-primary", primary);
     root.style.setProperty("--tenant-secondary", secondary);
     root.style.setProperty("--tenant-accent", accent);
-    
-    // Explicit console logging tracking schema mutations
-    console.log(`[System Theme Matrix] Node configuration compiled. Accent mapping: ${accent}`);
   }, [tenant]);
 
   return <ThemeContext.Provider value={tenant}>{children}</ThemeContext.Provider>;
