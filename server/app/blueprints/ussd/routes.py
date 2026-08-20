@@ -1,6 +1,7 @@
 from flask import Blueprint, request, Response
 from app.blueprints.ussd import controllers
 
+# Make sure this variable name is EXACTLY 'ussd_bp'
 ussd_bp = Blueprint("ussd", __name__)
 
 
