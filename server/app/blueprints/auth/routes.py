@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
 from marshmallow import ValidationError
 
 from app.schemas.user_schema import register_schema, login_schema
-from app.middleware.rate_limit import limiter, auth_rate_limit
+from app.middleware.rate_limit import limiter, auth_rate_limit, otp_rate_limit
 from app.utils.responses import error_response
 from app.blueprints.auth import controllers
 
@@ -37,6 +37,7 @@ def login():
 
 @auth_bp.route("/refresh", methods=["POST"])
 @jwt_required()
+@limiter.limit(auth_rate_limit)
 def refresh():
     claims = get_jwt()
     identity = get_jwt_identity()
