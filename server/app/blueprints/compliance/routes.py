@@ -9,7 +9,7 @@ compliance_bp = Blueprint("compliance", __name__)
 
 @compliance_bp.route("/audit-log", methods=["GET"])
 @require_tenant
-@minimum_role("group_admin")
+@minimum_role("member")
 def list_audit_log():
     """
     Returns the recent administrative audit trails for the tenant workspace.
