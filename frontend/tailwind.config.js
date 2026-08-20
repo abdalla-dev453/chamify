@@ -10,6 +10,14 @@ export default {
           surface: "#ffffff", 
           border: "#e2e8f0",
           
+          // Missing component added to stop the compilation crash
+          green: {
+             100: "#d1fae5", // Soft background for successful badge states
+    500: "#10b981", // Dynamic focus ring color boundary
+    600: "#039252", // Main core interactive state button token
+    700: "#027a44", // Main core interactive state button token
+          },
+          
           // Tailored nesting structures explicitly mapping keys
           navy: {
             50: "#f0f4f8",
