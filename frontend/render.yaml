@@ -1,0 +1,32 @@
+# Render Blueprint for the Chamify frontend (static site).
+# Deploy via "New +" -> "Blueprint", pointing at this repo with rootDir: frontend.
+services:
+  - type: web
+    name: chamify-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: ./dist
+    envVars:
+      # Vite bakes VITE_* vars into the JS bundle at BUILD time, not at
+      # request time — this must be set in Render's dashboard/env BEFORE
+      # the build runs, and must point at the deployed backend's public
+      # URL, not localhost. If this is missing, apiClient.js silently
+      # falls back to the relative path "/api/v1", which resolves to the
+      # static site's own domain (no backend there) and every API call
+      # 404s — this is the most common cause of "the frontend loads but
+      # nothing works."
+      - key: VITE_API_BASE_URL
+        value: https://chamify-api.onrender.com/api/v1
+    routes:
+      # Without this rewrite, React Router's client-side routes (e.g.
+      # directly loading/refreshing /wallets or /loans) 404 at the
+      # server, because there's no actual file at dist/wallets/index.html
+      # — only index.html exists, and React Router builds the rest of the
+      # route client-side after index.html loads. This is the other
+      # common cause of "frontend links not working" (specifically: works
+      # when you click a link inside the app, 404s on refresh or a
+      # bookmarked/shared URL).
+      - type: rewrite
+        source: /*
+        destination: /index.html

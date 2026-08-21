@@ -1,0 +1,73 @@
+# Render Blueprint for the Chamify API + worker.
+# Deploy via "New +" -> "Blueprint" in the Render dashboard, pointing at
+# this repo with rootDir: server. Fill in the marked env vars in the
+# dashboard after the first deploy (never commit real secrets here).
+services:
+  - type: web
+    name: chamify-api
+    runtime: python
+    rootDir: server
+    plan: starter
+    buildCommand: "pip install -r requirements.txt"
+    # `flask db upgrade` runs on every deploy so schema migrations are
+    # applied automatically before gunicorn starts serving traffic.
+    startCommand: "flask db upgrade && gunicorn wsgi:app --workers 2 --timeout 60 --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: FLASK_APP
+        value: wsgi.py
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chamify-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: chamify-redis
+          property: connectionString
+      - key: FRONTEND_ORIGIN
+        value: https://your-frontend.onrender.com
+      - key: DARAJA_CONSUMER_KEY
+        sync: false
+      - key: DARAJA_CONSUMER_SECRET
+        sync: false
+      - key: DARAJA_SHORTCODE
+        sync: false
+      - key: DARAJA_PASSKEY
+        sync: false
+      - key: DARAJA_CALLBACK_BASE_URL
+        value: https://chamify-api.onrender.com
+      - key: AT_API_KEY
+        sync: false
+
+  - type: worker
+    name: chamify-celery
+    runtime: python
+    rootDir: server
+    plan: starter
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A celery_worker.celery_app worker -l info"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chamify-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: chamify-redis
+          property: connectionString
+
+  - type: redis
+    name: chamify-redis
+    plan: starter
+    ipAllowList: []
+
+databases:
+  - name: chamify-db
+    plan: starter

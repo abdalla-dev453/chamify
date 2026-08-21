@@ -8,6 +8,28 @@ from datetime import timedelta
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
+def _normalize_db_url(raw_url: str) -> str:
+    """
+    Render (and Heroku-style providers) hand out DATABASE_URL as a bare
+    ``postgres://`` or ``postgresql://`` string. SQLAlchemy 2.x resolves a
+    driverless ``postgresql://`` to the psycopg2 dialect by default — but
+    this project only installs psycopg (v3) in requirements.txt. Left as-is,
+    the very first query raises ``ModuleNotFoundError: No module named
+    'psycopg2'`` in production, even though everything works locally if a
+    dev happens to have psycopg2 installed globally.
+
+    Rewriting the scheme to ``postgresql+psycopg://`` pins SQLAlchemy to the
+    driver that's actually installed, regardless of what scheme the
+    hosting provider hands back.
+    """
+    if raw_url.startswith("postgres://"):
+        raw_url = "postgresql://" + raw_url[len("postgres://"):]
+    if raw_url.startswith("postgresql://"):
+        raw_url = "postgresql+psycopg://" + raw_url[len("postgresql://"):]
+    return raw_url
+
+
+
 class BaseConfig:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "dev-jwt-secret-change-me")
@@ -15,8 +37,10 @@ class BaseConfig:
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     JWT_TOKEN_LOCATION = ["headers"]
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
+    SQLALCHEMY_DATABASE_URI = _normalize_db_url(
+        os.environ.get(
         "DATABASE_URL", "postgresql://chamaledger:chamaledger@localhost:5432/chamaledger_dev"
+    )
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True, "pool_recycle": 280}
@@ -25,7 +49,18 @@ class BaseConfig:
     CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL)
     CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL)
 
-    FRONTEND_ORIGIN = os.environ.get("FRONTEND_ORIGIN", "http://localhost:5173")
+    # Flask-Limiter's storage backend.Previously hardcoded to redis://localohost:6379/0 inside extensions.py . which meant the rate limits tried to reach a redis instance that doesn't exist on render and raised on every rate-limited request.
+    RATELIMIT_STORAGE_URI = REDIS_URL
+
+    # Accept one origin or a common-separated list (e.g. Render preview URL plus the production frontend URL) so CORS doesn't read a redeploy every time a preview domain is added
+    _frontend_origin_raw = os.environ.get("FRONTEND_ORIGIN", "http://localhost:5173")
+    FRONTEND_ORIGIN = (
+        [o.strip() for o in _frontend_origin_raw.split(",") 
+         if o.strip()]
+        if "," in _frontend_origin_raw
+        else _frontend_origin_raw
+    )
+
 
     # Kenyan integrations
     DARAJA_CONSUMER_KEY = os.environ.get("DARAJA_CONSUMER_KEY")

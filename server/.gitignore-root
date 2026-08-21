@@ -1,0 +1,22 @@
+<!-- # --- Python / backend --- -->
+<!-- __pycache__/ -->
+*.pyc
+*.pyo
+server/venv/
+server/.venv/
+server/.env
+server/*.egg-info/
+server/.pytest_cache/
+server/.coverage
+server/instance/
+
+<!-- # --- Node / frontend --- -->
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+<!-- # --- Editors / OS --- -->
+.vscode/
+.idea/
+.DS_Store
