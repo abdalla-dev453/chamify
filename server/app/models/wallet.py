@@ -22,8 +22,8 @@ class Wallet(TenantScopedModel):
     name = db.Column(db.String(150), nullable=False, default="Wallet")
 
     owner = db.relationship("User", foreign_keys=[owner_user_id])
-    savings_contributions = db.relationship("SavingsContribution", backref="wallet", lazy="dynamic")
-    loans = db.relationship("Loan", backref="wallet", lazy="dynamic")
+    savings_contributions = db.relationship("SavingsContribution", backref="wallet", lazy="dynamic", cascade="all, delete-orphan")
+    loans = db.relationship("Loan", backref="wallet", lazy="dynamic", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Wallet {self.name} ({self.wallet_type}) bal={self.balance}>"

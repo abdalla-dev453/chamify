@@ -4,6 +4,7 @@ and avoids circular imports by registering blueprints/models here, last.
 """
 import os
 from flask import Flask
+from flask_cors import CORS
 
 from app.config import config_by_name
 from app.extensions import db, migrate, jwt, ma, cors, limiter, celery
@@ -13,6 +14,8 @@ def create_app(config_name=None):
     config_name = config_name or os.environ.get("FLASK_ENV", "development")
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
+
+    CORS(app, resources={r"/api/*": {"origins": "localhost:5173"}}, supports_credentials=True)
 
     _init_extensions(app)
     _init_celery(app)

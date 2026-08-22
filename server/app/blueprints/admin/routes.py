@@ -68,6 +68,10 @@ def activate_tenant(tenant_id):
 @roles_required("system_admin")
 def configure_tenant_domain(tenant_id):
     payload = request.get_json(force=True, silent=True) or {}
+
+    if not payload.get("custom_domain"):
+        return error_response("Missing required parameter: domain_name", 422)
+    
     result, status_code = controllers.map_custom_domain_routing(tenant_id, payload)
     if status_code != 200:
         return error_response("Domain binding rejected", status_code, errors=result)

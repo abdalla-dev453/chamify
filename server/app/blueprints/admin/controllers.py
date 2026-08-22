@@ -32,13 +32,15 @@ def platform_overview():
     # Platform-wide revenue model (e.g., standard 1.5% ecosystem transaction processing fee)
     commission_earned = float(platform_volume) * 0.015
 
-    return success_response({
+    data = {
         "total_tenants": total_tenants,
         "active_tenants": active_tenants,
         "platform_volume": float(platform_volume),
         "loans_disbursed": float(loans_disbursed),
         "commission_earned": commission_earned
-    })
+    }
+
+    return success_response(data, "Platform overview retrieved successfully", 200), 200
 
 
 def kyc_queue():
@@ -46,7 +48,9 @@ def kyc_queue():
     Returns pending user identity verifications requiring system admin approval.
     """
     pending = Tenant.query.filter_by(iprs_verified=False).all()
-    return success_response([{"id": t.id, "name": t.name, "tier": t.tier} for t in pending])
+    data = [{"id": t.id, "name": t.name, "tier": t.tier} for t in pending]
+
+    return success_response(data, "KYC queue retrieved successfully", 200), 200
 
 
 def suspend_tenant_workspace(tenant_id, reason):
@@ -62,14 +66,19 @@ def suspend_tenant_workspace(tenant_id, reason):
         return {"error": "Tenant workspace is already in a suspended state"}, 400
         
     # Toggle architectural enforcement parameters
-    tenant.is_suspended = True
-    tenant.is_active = False
+    try:
+        tenant.is_suspended = True
+        tenant.is_active = False
     
     # Save the audit trail information into your configuration storage block if tracking fields exist
-    if hasattr(tenant, "suspension_reason"):
-        tenant.suspension_reason = reason
+        if hasattr(tenant, "suspension_reason"):
+            tenant.suspension_reason = reason
         
-    db.session.commit()
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return {"error": f"Failed to update tenant state: s{str(e)}"}, 500
+
     
     return {
         "tenant_id": tenant_id,
@@ -109,7 +118,7 @@ def map_custom_domain_routing(tenant_id, payload):
     Phase 8: Whitelists a customized DNS domain endpoint layout for white-labeled 
     group platforms (e.g., 'portal.chama_name.com').
     """
-    custom_domain = payload.get("custom_domain")
+    custom_domain = payload.get("custom_domain") or payload.get("domain_name")
     if not custom_domain:
         return {"error": "Missing 'custom_domain' field in incoming registration string"}, 422
         

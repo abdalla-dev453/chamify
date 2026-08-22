@@ -40,3 +40,18 @@ def create_sub_wallet():
     except ValidationError as err:
         return error_response("Invalid input", 422, errors=err.messages)
     return controllers.create_sub_wallet(data, get_current_tenant_id())
+
+
+@wallets_bp.route("/<string:wallet_id>/statement", methods=["GET"])
+@require_tenant
+@minimum_role("member")
+def wallet_statement(wallet_id):
+    return controllers.wallet_statement(wallet_id)
+
+
+
+@wallets_bp.route("/<string:wallet_id>/statement", methods=["POST"])
+@require_tenant
+@minimum_role("member")
+def request_wallet_statement(wallet_id):
+    return controllers.request_statement(wallet_id)

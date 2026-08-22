@@ -10,15 +10,23 @@ export default {
           surface: "#ffffff", 
           border: "#e2e8f0",
           
-          // Missing component added to stop the compilation crash
+          // Orange tokens for .btn-primary and badge-orange
+          orange: {
+            100: "#ffedd5",
+            500: "#f97316",
+            600: "#ea580c",
+            700: "#c2410c",
+          },
+
+          // Green tokens
           green: {
-             100: "#d1fae5", // Soft background for successful badge states
-    500: "#10b981", // Dynamic focus ring color boundary
-    600: "#039252", // Main core interactive state button token
-    700: "#027a44", // Main core interactive state button token
+            100: "#d1fae5", 
+            500: "#10b981", 
+            600: "#039252", 
+            700: "#027a44", 
           },
           
-          // Tailored nesting structures explicitly mapping keys
+          // Tailored nesting structures
           navy: {
             50: "#f0f4f8",
             100: "#d9e2ec",

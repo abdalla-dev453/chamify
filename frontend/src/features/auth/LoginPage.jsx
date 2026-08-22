@@ -110,7 +110,7 @@ export default function LoginPage() {
 
         <p className="text-xs text-slate-500 mt-8 text-center">
           New group?{" "}
-          <Link to="/onboarding" className="text-brand-green-700 font-semibold hover:underline">
+          <Link to="/onboarding" className="text-orange-600 font-semibold hover:underline">
             Onboard your chama
           </Link>
         </p>

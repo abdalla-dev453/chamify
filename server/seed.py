@@ -1,3 +1,4 @@
+
 """
 Seed script for local dev database.
 
@@ -32,11 +33,21 @@ TENANT_SLUG = "baraka-chama"
 
 
 def wipe_existing(tenant_slug):
-    existing = Tenant.query.filter_by(slug=tenant_slug).first()
-    if existing:
-        print(f"Removing existing tenant '{tenant_slug}' and all related data...")
-        db.session.delete(existing)  # cascades: users, wallets, subscription
-        db.session.commit()
+    """
+    This is a local dev seed script for a single-tenant sandbox database —
+    there's no real data here worth preserving. Deleting the tenant row by
+    row (users -> wallets -> loans -> ledger entries -> welfare requests ->
+    ...) means every new model that references users/wallets becomes a new
+    FK-ordering bug to chase one at a time. Since this script only ever
+    targets a disposable local dev database, resetting the whole schema is
+    simpler and won't need touching again as the schema grows.
+
+    NOT safe to run against any database with real tenant data you want to
+    keep — this wipes everything, not just `tenant_slug`.
+    """
+    print("Resetting local dev database schema...")
+    db.drop_all()
+    db.create_all()
 
 
 def seed():

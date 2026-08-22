@@ -36,7 +36,7 @@ def login():
 
 
 @auth_bp.route("/refresh", methods=["POST"])
-@jwt_required()
+@jwt_required(refresh=True)
 @limiter.limit(auth_rate_limit)
 def refresh():
     claims = get_jwt()
