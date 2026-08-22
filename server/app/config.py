@@ -25,7 +25,7 @@ def _normalize_db_url(raw_url: str) -> str:
     if raw_url.startswith("postgres://"):
         raw_url = "postgresql://" + raw_url[len("postgres://"):]
     if raw_url.startswith("postgresql://"):
-        raw_url = "postgresql+psycopg://" + raw_url[len("postgresql://"):]
+        raw_url = "postgresql://" + raw_url[len("postgresql://"):]
     return raw_url
 
 
